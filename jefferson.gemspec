@@ -16,7 +16,9 @@ Gem::Specification.new do |gem|
   gem.add_dependency(%q<rake>, ">= 0")
   gem.add_dependency(%q<typhoeus>, '~> 0.3.3')
   gem.add_dependency(%q<yajl-ruby>, ">= 0")
-  gem.add_dependency(%q<activemodel>)
+  gem.add_dependency('activesupport')
+  gem.add_dependency('activemodel')
+  gem.add_dependency('activeresource')
   gem.add_dependency(%q<sanitize>, ">= 0")
 
   gem.add_development_dependency('awesome_print')
@@ -26,4 +28,5 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
+  gem.version       = Jefferson::VERSION
 end
