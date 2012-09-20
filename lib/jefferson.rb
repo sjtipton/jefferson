@@ -13,4 +13,5 @@ module Jefferson
 
   require 'jefferson/version.rb'
   require 'jefferson/config.rb'
+  require 'jefferson/learning_resource.rb'
 end
