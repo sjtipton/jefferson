@@ -5,12 +5,12 @@ class Jefferson::LearningResource
   self.include_root_in_json = false
 
   ATTRIBUTES = [ :id,
-                 :status,
                  :keys,
                  :terms,
                  :locator,
                  :identity,
-                 :metadata ]
+                 :metadata,
+                 :active ]
 
   attr_accessor *ATTRIBUTES
 
@@ -89,13 +89,13 @@ class Jefferson::LearningResource
         parsed = Yajl::Parser.parse(response.body, symbolize_keys: true)
         record = parsed[:getrecord][:record].first
         resource_data = record[:resource_data]
-        yield new(     id: record[:header][:identifier],
-                   status: record[:header][:status],
+        yield new(     id: resource_data[:doc_ID],
                      keys: resource_data[:keys],
                     terms: resource_data[:TOS],
                   locator: resource_data[:resource_locator],
                  identity: resource_data[:identity],
-                 metadata: resource_data[:resource_data])
+                 metadata: resource_data[:resource_data],
+                   active: resource_data[:active])
       elsif response.code == 400
         raise ActiveResource::BadRequest.new(response)
       elsif response.code == 401
