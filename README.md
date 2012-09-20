@@ -1,29 +1,29 @@
 # Jefferson
 
-TODO: Write a gem description
+Thomas Jefferson was a big education guy.  He built UVA for crying out loud. His picture is on the $2 y'all!
+
+**Jefferson** is a REST API client gem that accesses the [Learning Registry API](https://github.com/LearningRegistry/LearningRegistry).
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Clone the repo from Github
 
-    gem 'jefferson'
+  git clone git@github.com:sjtipton/jefferson.git
 
-And then execute:
+Install any dependencies
 
-    $ bundle
+  bundle install
 
-Or install it yourself as:
+Build the gem
 
-    $ gem install jefferson
+  bundle exec rake build
 
-## Usage
+Install the gem
 
-TODO: Write usage instructions here
+  ruby -S gem install ./pkg/jefferson-0.0.1.gem
 
-## Contributing
+To vendorize into a project
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+  cd path/to/project
+
+  gem unpack jefferson -v 0.0.1 --target ./vendor/gems
