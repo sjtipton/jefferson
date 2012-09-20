@@ -43,9 +43,8 @@ class Jefferson::LearningResource
     opts[:from] = opts[:from] if opts[:from].present?
     opts[:until] = opts[:until] if opts[:until].present?
     opts[:identity] = opts[:identity] if opts[:identity].present?
-    opts[:ids_only] = opts[:ids_only] if opts[:ids_only].present?
     opts[:resumption_token] = opts[:resumption_token] if opts[:resumption_token].present?
-    options = opts.select { |k,v| %w(any_tags from until identity ids_only resumption_token).include?(k.to_s) && v.present? }
+    options = opts.select { |k,v| %w(any_tags from until identity resumption_token).include?(k.to_s) && v.present? }
     options.symbolize_keys!
     query_params = options.to_param
     request = Typhoeus::Request.new(Jefferson::Config.base_url +
@@ -58,7 +57,13 @@ class Jefferson::LearningResource
         learning_resources = []
         parsed = Yajl::Parser.parse(response.body, symbolize_keys: true)
         parsed[:documents].each do |result|
-          learning_resources << new(id: result[:doc_ID])
+          learning_resources << new(id: result[:resource_data_description][:doc_ID],
+                                  keys: result[:resource_data_description][:keys],
+                                 terms: result[:resource_data_description][:TOS],
+                               locator: result[:resource_data_description][:resource_locator],
+                              identity: result[:resource_data_description][:identity],
+                              metadata: result[:resource_data_description][:resource_data],
+                                active: result[:resource_data_description][:active])
         end
         yield learning_resources
       elsif response.code == 400
