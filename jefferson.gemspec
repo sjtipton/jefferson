@@ -6,11 +6,21 @@ require 'jefferson/version'
 Gem::Specification.new do |gem|
   gem.name          = "jefferson"
   gem.version       = Jefferson::VERSION
-  gem.authors       = ["Steve Tipton"]
-  gem.email         = ["steve.tipton@employmentguide.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.authors       = ["Steve Tipton", "Jeff Self"]
+  gem.email         = ["steve.tipton@employmentguide.com",
+                       "jeff.self@employmentguide.com"]
+  gem.description   = %q{REST API client gem for accessing Learning Registry resources}
+  gem.summary       = %q{REST API client gem for accessing Learning Registry resources}
   gem.homepage      = ""
+
+  gem.add_dependency(%q<rake>, ">= 0")
+  gem.add_dependency(%q<typhoeus>, '~> 0.3.3')
+  gem.add_dependency(%q<yajl-ruby>, ">= 0")
+  gem.add_dependency(%q<activemodel>)
+  gem.add_dependency(%q<sanitize>, ">= 0")
+
+  gem.add_development_dependency('awesome_print')
+  gem.add_development_dependency('interactive_editor')
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
